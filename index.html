@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script src="vrecorder.js"></script>
+<script>
+    var recorder = new VRecorder({
+        onStopped: function (blob) {
+            var audioURL = window.URL.createObjectURL(blob);
+
+            var link = document.createElement("a");
+            link.setAttribute("href", audioURL);
+            link.download = '1.ogg';
+            link.click();
+        }
+    });
+
+    recorder.start()
+    setTimedOut(recorder.stop, 5000);
+</script>
+</body>
+</html>
