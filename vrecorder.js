@@ -2,11 +2,11 @@ var VRecorder = function (options) {
     var options = Object.assign({}, {
         onReady: function (recorder, stream) {
         },
-        onStart: function () {
+        onStart: function (recorder) {
         },
-        onStop: function () {
+        onStop: function (recorder) {
         },
-        onStopped: function (blob) {
+        onStopped: function (recorder, blob) {
         },
     }, options);
 
@@ -18,13 +18,13 @@ var VRecorder = function (options) {
     var chunks = [];
 
     this.start = function () {
-        options.onStart();
+        options.onStart(self);
         mediaRecorder.start();
         // console.log(mediaRecorder.state);
     }
 
     this.stop = function () {
-        options.onStop();
+        options.onStop(self);
         mediaRecorder.stop();
         // console.log(mediaRecorder.state);
         // mediaRecorder.requestData();
@@ -34,7 +34,7 @@ var VRecorder = function (options) {
         // data available after MediaRecorder.stop() has been called.
         var blob = new Blob(chunks, {'type': 'audio/ogg; codecs=opus'});
         chunks = [];
-        options.onStopped(blob);
+        options.onStopped(self, blob);
         console.log("recorder stopped");
     }
 

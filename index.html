@@ -11,7 +11,7 @@
             recorder.start();
             setTimeout(recorder.stop, 3000);
         },
-        onStopped: function (blob) {
+        onStopped: function (recorder, blob) {
             var audioURL = window.URL.createObjectURL(blob);
             var link = document.createElement("a");
             link.setAttribute("href", audioURL);
