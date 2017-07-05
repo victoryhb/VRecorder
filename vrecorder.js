@@ -1,5 +1,7 @@
 var VRecorder = function (options) {
     var options = Object.assign({}, {
+        onReady: function (recorder, stream) {
+        },
         onStart: function () {
         },
         onStop: function () {
@@ -39,6 +41,7 @@ var VRecorder = function (options) {
     var onSuccess = function (stream) {
         mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.onstop = onStopped;
+        options.onReady(self, stream);
         mediaRecorder.ondataavailable = function (e) {
             chunks.push(e.data);
         }

@@ -6,19 +6,19 @@
 <body>
 <script src="vrecorder.js"></script>
 <script>
-    var recorder = new VRecorder({
+    new VRecorder({
+        onReady: function (recorder, stream) {
+            recorder.start();
+            setTimeout(recorder.stop, 3000);
+        },
         onStopped: function (blob) {
             var audioURL = window.URL.createObjectURL(blob);
-
             var link = document.createElement("a");
             link.setAttribute("href", audioURL);
-            link.download = '1.ogg';
+            link.download = 'recording.ogg';
             link.click();
         }
     });
-
-    recorder.start()
-    setTimedOut(recorder.stop, 5000);
 </script>
 </body>
 </html>
